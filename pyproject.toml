@@ -5,10 +5,11 @@ description = "My submission for the Riot technical test"
 readme = "README.md"
 requires-python = ">=3.13"
 dependencies = [
-    "flake8>=7.1.2",
+    "black>=25.1.0",
     "flask>=3.1.0",
     "pytest>=8.3.5",
     "python-dotenv>=1.0.1",
+    "ruff>=0.11.0",
 ]
 
 [tool.pytest.ini_options]
@@ -16,3 +17,19 @@ minversion = "6.0"
 addopts = "-ra -q"
 pythonpath = ["."]
 testpaths = ["tests"]
+
+[tool.ruff.lint]
+select = [
+    # pycodestyle
+    "E",
+    # Pyflakes
+    "F",
+    # pyupgrade
+    "UP",
+    # flake8-bugbear
+    "B",
+    # flake8-simplify
+    "SIM",
+    # isort
+    "I",
+]
