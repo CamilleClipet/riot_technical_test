@@ -36,7 +36,12 @@ You can test the endpoints in the terminal with [HTTPie](https://httpie.io/), an
 At the root of the project, run:
 
 ```bash
-$ http http://127.0.0.1:3000/encrypt
+$ http http://127.0.0.1:3000/encrypt \
+    name=John \
+    age:=29 \
+    married:=false \
+    hobbies:='["http", "pies"]' \
+    favorite:='{"tool": "HTTPie"}'
 ```
 
 This should return the following:
@@ -44,12 +49,18 @@ This should return the following:
 ```bash
 HTTP/1.1 200 OK
 Connection: close
-Content-Length: 17
+Content-Length: 137
 Content-Type: text/html; charset=utf-8
-Date: Tue, 18 Mar 2025 17:05:31 GMT
+Date: Wed, 19 Mar 2025 14:41:06 GMT
 Server: Werkzeug/3.1.3 Python/3.13.2
 
-to be implemented
+{
+    "age": "Mjk=",
+    "favorite": "eyJ0b29sIjogIkhUVFBpZSJ9",
+    "hobbies": "WyJodHRwIiwgInBpZXMiXQ==",
+    "married": "RmFsc2U=",
+    "name": "Sm9obg=="
+}
 ```
 
 You can also use an API testing platform of your choice ([Postman](https://www.postman.com/downloads/), [Insomnia](https://insomnia.rest/)...)
