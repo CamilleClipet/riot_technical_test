@@ -4,6 +4,7 @@ import base64
 # to make it easier to change the encoding/decoding algorithm in the future
 # with minimal changes to the codebase
 
+
 def encode_with_chosen_algo(payload):
     return base64.b64encode(payload)
 

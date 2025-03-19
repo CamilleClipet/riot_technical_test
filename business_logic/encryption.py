@@ -19,7 +19,7 @@ def encrypt_json_item(value) -> str:
     if isinstance(value, (dict | list)):
         json_str = json.dumps(value)
         return encrypt(json_str)
-    elif isinstance(value, (int| float| str)):
+    elif isinstance(value, (int | float | str)):
         return encrypt(str(value))
     elif value is None:
         return encrypt_null()

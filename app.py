@@ -7,7 +7,7 @@ app = Flask(__name__)
 
 
 @app.route("/encrypt", methods=["POST"])
-def _encrypt():
+def _encrypt() -> Response:
     raw_data = request.data
     if raw_data is None:
         return Response("Bad Request", status=400)
@@ -22,7 +22,7 @@ def _encrypt():
 
 
 @app.route("/decrypt", methods=["POST"])
-def _decrypt():
+def _decrypt() -> Response:
     raw_data = request.data
     if raw_data is None:
         return Response("Bad Request", status=400)
