@@ -20,6 +20,12 @@ Clone this repo:
 $ git@github.com:CamilleClipet/riot_technical_test.git
 ```
 
+Create the .env file to generate and store the secret key
+
+```bash
+$ uv run init_env.py --script
+```
+
 ## Run the development server
 
 ```bash
