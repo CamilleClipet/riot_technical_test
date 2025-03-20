@@ -1,5 +1,6 @@
-from flask import Flask, Response, request
 import json
+
+from flask import Flask, Response, request
 
 from business_logic.decryption import decrypt_json_depth_1
 from business_logic.encryption import encrypt_json_depth_1
@@ -11,12 +12,8 @@ app = Flask(__name__)
 
 @app.route("/encrypt", methods=["POST"])
 def _encrypt() -> Response:
-    raw_data = request.data
-    if raw_data is None:
-        return Response("Bad Request", status=400)
-
     try:
-        json_data = raw_data.decode("utf-8")
+        json_data = get_and_decode_raw_data()
         result = encrypt_json_depth_1(json_data)
         return Response(result, status=200)
 
@@ -26,11 +23,8 @@ def _encrypt() -> Response:
 
 @app.route("/decrypt", methods=["POST"])
 def _decrypt() -> Response:
-    raw_data = request.data
-    if raw_data is None:
-        return Response("Bad Request", status=400)
     try:
-        json_data = raw_data.decode("utf-8")
+        json_data = get_and_decode_raw_data()
         result = decrypt_json_depth_1(json_data)
         return Response(result, status=200)
     except Exception as e:
@@ -39,12 +33,8 @@ def _decrypt() -> Response:
 
 @app.route("/sign", methods=["POST"])
 def _sign():
-    raw_data = request.data
-    if raw_data is None:
-        return Response("Bad Request", status=400)
-
     try:
-        json_data = raw_data.decode("utf-8")
+        json_data = get_and_decode_raw_data()
         # remove whitespaces and line breaks
         json_data = json.dumps(json.loads(json_data)).strip()
         result = compute_hmac_signature(json_data)
@@ -78,3 +68,8 @@ def _verify():
         return Response("Signature Verification Failed", status=400)
     except Exception as e:
         return Response(str(e), status=500)
+
+
+def get_and_decode_raw_data() -> str:
+    raw_data = request.data
+    return raw_data.decode("utf-8")
