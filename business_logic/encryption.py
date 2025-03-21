@@ -1,6 +1,6 @@
 import json
 
-from business_logic.helpers.helpers import encode_with_chosen_algo
+from business_logic.helpers.helpers import encode_with_chosen_algo, type_as_string
 
 
 def encrypt(data: str) -> str:
@@ -8,19 +8,21 @@ def encrypt(data: str) -> str:
 
 
 def encrypt_bool(value: bool) -> str:
-    return encrypt("True" if value else "False")
+    return encrypt(json.dumps((value, "bool")))
 
 
 def encrypt_null() -> str:
-    return encrypt("null")
+    return encrypt(json.dumps((None, "NoneType")))
 
 
 def encrypt_json_item(value) -> str:
     if isinstance(value, (dict | list)):
         json_str = json.dumps(value)
         return encrypt(json_str)
-    elif isinstance(value, (int | float | str)):
-        return encrypt(str(value))
+    elif isinstance(value, (int | float)):
+        return encrypt(json.dumps((value, type_as_string(value))))
+    elif isinstance(value, str):
+        return encrypt(value)
     elif value is None:
         return encrypt_null()
     elif isinstance(value, bool):

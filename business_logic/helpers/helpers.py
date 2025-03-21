@@ -11,3 +11,7 @@ def encode_with_chosen_algo(payload):
 
 def decode_with_chosen_algo(payload):
     return base64.b64decode(payload)
+
+
+def type_as_string(value) -> str:
+    return type(value).__name__
