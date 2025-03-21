@@ -6,7 +6,7 @@ from business_logic.verifying import verify_signature
 
 @pytest.mark.unit
 def test_signing_with_valid_payload():
-    test_json = '{"name": "John", "children": ["Alice", "Charlie"], "profession": {"title": "Software Engineer", "years": 5}, "isCadre": true, "address": null}'
+    test_json = '{"name": "John", "children": ["Alice", "Charlie"], "profession": {"title": "Software Engineer", "years": 5}, "isCadre": true, "address": null}' # noqa: E501
     signature = compute_hmac_signature(test_json)
     assert isinstance(signature, str)
 
@@ -27,7 +27,7 @@ def test_signing_with_invalid_payload():
 
 @pytest.mark.unit
 def test_verifying_is_valid():
-    test_json = '{"name": "John", "children": ["Alice", "Charlie"], "profession": {"title": "Software Engineer", "years": 5}, "isCadre": true, "address": null}'
+    test_json = '{"name": "John", "children": ["Alice", "Charlie"], "profession": {"title": "Software Engineer", "years": 5}, "isCadre": true, "address": null}' # noqa: E501
     signature = compute_hmac_signature(test_json)
     is_signature_verified = verify_signature(signature, test_json)
     assert is_signature_verified is True
@@ -50,7 +50,7 @@ def test_verifying_with_invalid_payload():
 
 @pytest.mark.unit
 def test_verifying_with_wrong_signature():
-    test_json = '{"name": "John", "children": ["Alice", "Charlie"], "profession": {"title": "Software Engineer", "years": 5}, "isCadre": true, "address": null}'
+    test_json = '{"name": "John", "children": ["Alice", "Charlie"], "profession": {"title": "Software Engineer", "years": 5}, "isCadre": true, "address": null}' # noqa: E501
     signature = compute_hmac_signature(test_json) + "1"
     is_signature_verified = verify_signature(signature, test_json)
     assert is_signature_verified is False
@@ -58,8 +58,8 @@ def test_verifying_with_wrong_signature():
 
 @pytest.mark.unit
 def test_verifying_with_wrong_payload():
-    test_json = '{"name": "John", "children": ["Alice", "Charlie"], "profession": {"title": "Software Engineer", "years": 5}, "isCadre": true, "address": null}'
-    erroneous_test_json = '{"name": "John", "children": ["Alicia", "Charlie"], "profession": {"title": "Software Engineer", "years": 5}, "isCadre": true, "address": null}'
+    test_json = '{"name": "John", "children": ["Alice", "Charlie"], "profession": {"title": "Software Engineer", "years": 5}, "isCadre": true, "address": null}' # noqa: E501
+    erroneous_test_json = '{"name": "John", "children": ["Alicia", "Charlie"], "profession": {"title": "Software Engineer", "years": 5}, "isCadre": true, "address": null}' # noqa: E501
     signature = compute_hmac_signature(erroneous_test_json)
     is_signature_verified = verify_signature(signature, test_json)
     assert is_signature_verified is False
