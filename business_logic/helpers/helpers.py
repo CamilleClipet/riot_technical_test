@@ -5,11 +5,11 @@ import base64
 # with minimal changes to the codebase
 
 
-def encode_with_chosen_algo(payload):
+def encode_with_chosen_algo(payload: bytes) -> bytes:
     return base64.b64encode(payload)
 
 
-def decode_with_chosen_algo(payload):
+def decode_with_chosen_algo(payload: bytes) -> bytes:
     return base64.b64decode(payload)
 
 
