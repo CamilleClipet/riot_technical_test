@@ -39,9 +39,7 @@ def decrypt_json_depth_1(json_data: str) -> str:
             else:
                 dict_data[key] = (
                     decoded_tuple
-                    if (
-                        isinstance(decoded_tuple, list | dict)
-                    )
+                    if (isinstance(decoded_tuple, list | dict))
                     else decoded_value
                 )
 
